@@ -33,4 +33,6 @@ func heapify(i int, arr []int) {
 	rootNode = node{key: arr[i]}
 	rootNode.left = node{key: arr[left]}
 	rootNode.right = node{key: arr[right]}
+
+	heapify(i, arr)
 }
