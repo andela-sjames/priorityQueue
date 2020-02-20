@@ -6,8 +6,14 @@ func main() {
 	fmt.Println("Define the tree")
 
 	arr := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8}
+	var root interface{}
 
-	constructHeap(arr)
+	l := len(arr)
+	// root := interface{}(nil)
+
+	root = constructBTree(arr, root, 0, l)
+	fmt.Println(root)
+
 }
 
 type node struct {
@@ -16,23 +22,23 @@ type node struct {
 	right interface{}
 }
 
-func constructHeap(arr []int) {
+// let's construct a simple Binary tree
+func constructBTree(arr []int, root interface{}, index int, l int) interface{} {
 
-	for i := range arr {
-		heapify(i, arr)
+	var leftIndex int
+	var rigntIndex int
+
+	// base condition
+	if index < l {
+		n := node{key: arr[index]}
+		root := n
+
+		leftIndex = 2*index + 1
+		rigntIndex = 2*index + 2
+
+		constructBTree(arr, root.left, leftIndex, l)
+		constructBTree(arr, root.right, rigntIndex, l)
 	}
-}
 
-func heapify(i int, arr []int) {
-
-	var rootNode node
-
-	left := 2*i + 1
-	right := 2*i + 2
-
-	rootNode = node{key: arr[i]}
-	rootNode.left = node{key: arr[left]}
-	rootNode.right = node{key: arr[right]}
-
-	heapify(i, arr)
+	return root
 }
