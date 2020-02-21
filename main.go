@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Define the tree")
+	fmt.Println("Define the array")
 
 	arr := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8}
 
@@ -12,7 +12,10 @@ func main() {
 
 	s := make([]int, 0)
 
+	fmt.Println("Construct the Binary tree")
 	tree := constructBinTree(arr, root, 0, l)
+
+	fmt.Println("Traverse the Binary tree to see if it matches the array")
 	result := preOrderTraverse(tree, s)
 
 	fmt.Println(result)
