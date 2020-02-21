@@ -6,6 +6,7 @@ func main() {
 	fmt.Println("Define the array")
 
 	arr := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8}
+	fmt.Println(arr)
 
 	l := len(arr)
 	root := &node{}
@@ -15,7 +16,7 @@ func main() {
 	fmt.Println("Construct the Binary tree")
 	tree := constructBinTree(arr, root, 0, l)
 
-	fmt.Println("Traverse the Binary tree to see if it matches the array")
+	fmt.Println("preOrderTraverse the Binary tree")
 	result := preOrderTraverse(tree, s)
 
 	fmt.Println(result)
@@ -48,10 +49,11 @@ func constructBinTree(arr []int, root *node, index int, l int) *node {
 }
 
 func preOrderTraverse(tree *node, array []int) []int {
+
 	if tree != nil {
-		array = append(array, tree.key)
-		preOrderTraverse(tree.left, array)
-		preOrderTraverse(tree.right, array)
+		array = append(array, tree.key)             // root
+		array = preOrderTraverse(tree.left, array)  // left
+		array = preOrderTraverse(tree.right, array) // right
 	}
 
 	return array
