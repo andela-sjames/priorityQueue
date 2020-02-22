@@ -28,6 +28,12 @@ type node struct {
 	right *node
 }
 
+func heapify(arr []int) *node {
+
+	n := &node{key: 1}
+	return n
+}
+
 // let's construct a simple Binary tree
 func constructBinTree(arr []int, root *node, index int, l int) *node {
 
