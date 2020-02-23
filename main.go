@@ -28,10 +28,16 @@ type node struct {
 	right *node
 }
 
-func heapify(arr []int) *node {
+func maxHeapify(arr []int, index, n int) *node {
+	leftIndex = 2*index + 1
+	rigntIndex = 2*index + 2
 
 	n := &node{key: 1}
 	return n
+}
+
+func swap(x, y []int) {
+	// swap here dude.
 }
 
 // let's construct a simple Binary tree
