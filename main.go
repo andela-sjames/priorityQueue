@@ -5,16 +5,21 @@ import "fmt"
 func main() {
 	fmt.Println("Define the array")
 
-	arr := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8}
-	fmt.Println(arr)
+	arrOne := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8} // Binary Array
+	arrTwo := []int{4, 7, 8, 3, 2, 6, 5}                       // Non Heap Array
 
-	l := len(arr)
+	valTwo := maxHeapify(arrTwo, 0, len(arrTwo))
+	fmt.Println(valTwo)
+
+	fmt.Println(arrOne)
+
+	l := len(arrOne)
 	root := &node{}
 
 	s := make([]int, 0)
 
 	fmt.Println("Construct the Binary tree")
-	tree := constructBinTree(arr, root, 0, l)
+	tree := constructBinTree(arrOne, root, 0, l)
 
 	fmt.Println("preOrderTraverse the Binary tree")
 	result := preOrderTraverse(tree, s)
@@ -28,23 +33,46 @@ type node struct {
 	right *node
 }
 
-func maxHeapify(arr []int, index, n int) *node {
-	leftIndex = 2*index + 1
-	rigntIndex = 2*index + 2
+func maxHeapify(arr []int, rootIndex, arrayLength int) []int {
+	var leftIndex int
+	var rightIndex int
 
-	n := &node{key: 1}
-	return n
+	var largest int
+
+	leftIndex = 2*rootIndex + 1
+	rightIndex = 2*rootIndex + 2
+
+	if leftIndex <= arrayLength && arr[leftIndex] > arr[rootIndex] {
+		largest = leftIndex
+	} else {
+		largest = rootIndex
+	}
+
+	if rightIndex <= arrayLength && arr[rightIndex] > arr[largest] {
+		largest = rightIndex
+	}
+
+	if largest != rootIndex {
+		swap(arr, rootIndex, largest)
+		maxHeapify(arr, largest, arrayLength)
+	}
+
+	return arr
 }
 
-func swap(x, y []int) {
+func swap(arr []int, x, y int) {
 	// swap here dude.
+	tmp := arr[x]
+	arr[x] = arr[y]
+	arr[y] = tmp
+
 }
 
 // let's construct a simple Binary tree
 func constructBinTree(arr []int, root *node, index int, l int) *node {
 
 	var leftIndex int
-	var rigntIndex int
+	var rightIndex int
 
 	// base condition
 	if index < l {
@@ -52,10 +80,10 @@ func constructBinTree(arr []int, root *node, index int, l int) *node {
 		root = n
 
 		leftIndex = 2*index + 1
-		rigntIndex = 2*index + 2
+		rightIndex = 2*index + 2
 
 		root.left = constructBinTree(arr, root.left, leftIndex, l)
-		root.right = constructBinTree(arr, root.right, rigntIndex, l)
+		root.right = constructBinTree(arr, root.right, rightIndex, l)
 	}
 	return root
 }
