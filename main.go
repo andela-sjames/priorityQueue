@@ -6,7 +6,7 @@ func main() {
 	fmt.Println("Define the array")
 
 	arrOne := []int{2, 3, 4, 7, 5, 8, 9, 8, 10, 12, 11, 13, 8} // Binary Array
-	// arrTwo := []int{4, 7, 8, 3, 2, 6, 5}                       // Non Heap Array
+	// heapArr := []int{4, 7, 8, 3, 2, 6, 5, 1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17 } // Non Heap Array
 
 	fmt.Println(arrOne)
 
@@ -66,6 +66,7 @@ func buildHeap(arr []int, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
+	fmt.Println(startIdx, "startIdx haq haq haq")
 
 	// Perform reverse level order traversal
 	// from last non-leaf node and heapify
@@ -74,6 +75,12 @@ func buildHeap(arr []int, size int) {
 		heapify(arr, i, size)
 	}
 
+}
+
+func printHeap(arr []int, size int) {
+	for _, val := range arr {
+		fmt.Println(val)
+	}
 }
 
 func swap(arr []int, x, y int) {
