@@ -40,7 +40,8 @@ func heapify(arr []int, rootIndex, size int) {
 	}
 }
 
-func buildHeap(arr []int, size int) {
+// Buildheap function defined
+func BuildHeap(arr []int, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
@@ -54,7 +55,8 @@ func buildHeap(arr []int, size int) {
 
 }
 
-func printHeap(arr []int, size int) {
+// PrintHeap function defined
+func PrintHeap(arr []int, size int) {
 	result := make([]int, 0)
 	for _, val := range arr {
 		result = append(result, val)
