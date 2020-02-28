@@ -71,3 +71,13 @@ func swap(arr []int, x, y int) {
 	arr[x] = arr[y]
 	arr[y] = tmp
 }
+
+// RemoveQueue defined to remove an item from the heap
+func RemoveQueue() {
+
+}
+
+// PollQueue defined to get the top element from the heap
+func PollQueue() {
+
+}
