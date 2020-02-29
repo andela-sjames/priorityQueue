@@ -8,6 +8,11 @@ type node struct {
 	right *node
 }
 
+type item struct {
+	item     string
+	priority int
+}
+
 // To heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the size of the heap.
 func heapify(arr []int, rootIndex, size int) {
