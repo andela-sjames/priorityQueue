@@ -8,14 +8,15 @@ type node struct {
 	right *node
 }
 
-type item struct {
-	item     string
-	priority int
+// PItem struct defined to describe a priority object
+type PItem struct {
+	Item     string
+	Priority int
 }
 
 // To heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the size of the heap.
-func heapify(arr []int, rootIndex, size int) {
+func heapify(arr []PItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
 
@@ -45,8 +46,8 @@ func heapify(arr []int, rootIndex, size int) {
 	}
 }
 
-// Buildheap function defined
-func BuildHeap(arr []int, size int) {
+// BuildHeap function defined
+func BuildHeap(arr []PItem, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
@@ -61,8 +62,8 @@ func BuildHeap(arr []int, size int) {
 }
 
 // PrintHeap function defined
-func PrintHeap(arr []int, size int) {
-	result := make([]int, 0)
+func PrintHeap(arr []PItem, size int) {
+	result := make([]PItem, 0)
 	for _, val := range arr {
 		result = append(result, val)
 	}
@@ -70,7 +71,7 @@ func PrintHeap(arr []int, size int) {
 	fmt.Println(result)
 }
 
-func swap(arr []int, x, y int) {
+func swap(arr []PItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
 	arr[x] = arr[y]
