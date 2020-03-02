@@ -4,7 +4,12 @@ import "fmt"
 
 // MaxHeap struct defined to describe the Priority Queue ADT
 type MaxHeap struct {
-	pqArr []*PItem
+	pqArr []*pItem
+}
+
+// NewHeap returns a new MaxHeap struct
+func NewHeap() *MaxHeap {
+	return &MaxHeap{}
 }
 
 type node struct {
@@ -13,8 +18,8 @@ type node struct {
 	right *node
 }
 
-// PItem struct defined to describe a priority object
-type PItem struct {
+// pItem struct defined to describe a priority object
+type pItem struct {
 	Item     string
 	Priority int
 }
@@ -24,16 +29,14 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 	// Insert an Item at the end of array and bubble back up to
 	// satisfy the heap invariant.
 
-	newPriority := &PItem{Item: "Visit China", Priority: 4}
+	newPriority := &pItem{Item: "Visit China", Priority: 4}
 	m.pqArr = append(m.pqArr, newPriority)
-
-	m.BuildHeap(m.pqArr, len(m.pqArr))
-
+	m.buildHeap(m.pqArr, len(m.pqArr))
 }
 
 // To heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the size of the heap.
-func (m *MaxHeap) heapify(arr []*PItem, rootIndex, size int) {
+func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
 
@@ -63,8 +66,8 @@ func (m *MaxHeap) heapify(arr []*PItem, rootIndex, size int) {
 	}
 }
 
-// BuildHeap function defined
-func (m *MaxHeap) BuildHeap(arr []*PItem, size int) {
+// buildHeap function defined
+func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
@@ -79,8 +82,8 @@ func (m *MaxHeap) BuildHeap(arr []*PItem, size int) {
 }
 
 // PrintHeap function defined
-func (m *MaxHeap) PrintHeap(arr []PItem, size int) {
-	result := make([]PItem, 0)
+func (m *MaxHeap) PrintHeap(arr []pItem, size int) {
+	result := make([]pItem, 0)
 	for _, val := range arr {
 		result = append(result, val)
 	}
@@ -88,7 +91,7 @@ func (m *MaxHeap) PrintHeap(arr []PItem, size int) {
 	fmt.Println(result)
 }
 
-func (m *MaxHeap) swap(arr []*PItem, x, y int) {
+func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
 	arr[x] = arr[y]

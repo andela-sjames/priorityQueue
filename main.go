@@ -1,9 +1,5 @@
 package main
 
-import (
-	"github.com/andela-sjames/priorityQueue/pqueue"
-)
-
 func main() {
 
 	// Priority Queue ADT uses the HEAP Invariant implementation.
@@ -30,11 +26,12 @@ func main() {
 	// 	{Item: "Sahre the money", Priority: 17},
 	// }
 
-	pqArr2 := []pqueue.PItem{
-		{Item: "Visit China", Priority: 4},
-		{Item: "Visit Japan", Priority: 7},
-	}
+	// pqArr2 := []pqueue.PItem{
+	// 	{Item: "Visit China", Priority: 4},
+	// 	{Item: "Visit Japan", Priority: 7},
+	// }
 
-	pqueue.BuildHeap(pqArr2, len(pqArr2))
-	pqueue.PrintHeap(pqArr2, len(pqArr2))
+	// pqueue.BuildHeap(pqArr2, len(pqArr2))
+	// pqueue.PrintHeap(pqArr2, len(pqArr2))
+
 }
