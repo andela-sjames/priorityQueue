@@ -28,12 +28,12 @@ func heapify(arr []PItem, rootIndex, size int) {
 	rightIndex = 2*rootIndex + 2
 
 	// if the left child is larger than root
-	if leftIndex < size && arr[leftIndex] > arr[largest] {
+	if leftIndex < size && arr[leftIndex].Priority > arr[largest].Priority {
 		largest = leftIndex
 	}
 
 	// if the right child is larger than largest so far
-	if rightIndex < size && arr[rightIndex] > arr[largest] {
+	if rightIndex < size && arr[rightIndex].Priority > arr[largest].Priority {
 		largest = rightIndex
 	}
 
