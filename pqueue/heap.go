@@ -3,11 +3,8 @@ package pqueue
 import "fmt"
 
 // MaxHeap struct defined to describe the Priority Queue ADT
-type MaxHeap struct{}
-
-// InsertPriority insert a new item with priority in integer
-func (mh *MaxHeap) InsertPriority(item string, priority int) {
-	// code goes here
+type MaxHeap struct {
+	pqArr []*PItem
 }
 
 type node struct {
@@ -22,9 +19,21 @@ type PItem struct {
 	Priority int
 }
 
+// InsertPriority insert a new item with priority in integer
+func (m *MaxHeap) InsertPriority(item string, priority int) {
+	// Insert an Item at the end of array and bubble back up to
+	// satisfy the heap invariant.
+
+	newPriority := &PItem{Item: "Visit China", Priority: 4}
+	m.pqArr = append(m.pqArr, newPriority)
+
+	m.BuildHeap(m.pqArr, len(m.pqArr))
+
+}
+
 // To heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the size of the heap.
-func heapify(arr []PItem, rootIndex, size int) {
+func (m *MaxHeap) heapify(arr []*PItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
 
@@ -47,15 +56,15 @@ func heapify(arr []PItem, rootIndex, size int) {
 
 	// if the largest is not root
 	if largest != rootIndex {
-		swap(arr, rootIndex, largest)
+		m.swap(arr, rootIndex, largest)
 
 		// recursively heapify the affected sub-tree
-		heapify(arr, largest, size)
+		m.heapify(arr, largest, size)
 	}
 }
 
 // BuildHeap function defined
-func BuildHeap(arr []PItem, size int) {
+func (m *MaxHeap) BuildHeap(arr []*PItem, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
@@ -64,13 +73,13 @@ func BuildHeap(arr []PItem, size int) {
 	// from last non-leaf node and heapify
 	// each node
 	for i := startIdx; i >= 0; i-- {
-		heapify(arr, i, size)
+		m.heapify(arr, i, size)
 	}
 
 }
 
 // PrintHeap function defined
-func PrintHeap(arr []PItem, size int) {
+func (m *MaxHeap) PrintHeap(arr []PItem, size int) {
 	result := make([]PItem, 0)
 	for _, val := range arr {
 		result = append(result, val)
@@ -79,7 +88,7 @@ func PrintHeap(arr []PItem, size int) {
 	fmt.Println(result)
 }
 
-func swap(arr []PItem, x, y int) {
+func (m *MaxHeap) swap(arr []*PItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
 	arr[x] = arr[y]
