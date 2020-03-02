@@ -2,6 +2,14 @@ package pqueue
 
 import "fmt"
 
+// MaxHeap struct defined to describe the Priority Queue ADT
+type MaxHeap struct{}
+
+// InsertPriority insert a new item with priority in integer
+func (mh *MaxHeap) InsertPriority(item string, priority int) {
+	// code goes here
+}
+
 type node struct {
 	key   int
 	left  *node

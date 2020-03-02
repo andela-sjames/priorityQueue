@@ -6,7 +6,7 @@ import (
 
 func main() {
 
-	// Priority Queue ADT uses the HEAP implementation.
+	// Priority Queue ADT uses the HEAP Invariant implementation.
 	// heapArr := []int{4, 7, 8, 3, 2, 6, 5, 1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17} // Non Heap Array
 
 	pqArr := []pqueue.PItem{
