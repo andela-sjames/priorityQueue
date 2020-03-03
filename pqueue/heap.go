@@ -1,6 +1,7 @@
 package pqueue
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
@@ -84,12 +85,14 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 
 // PrintHeap function defined
 func (m *MaxHeap) PrintHeap() {
-	// result := make([]*pItem, 0)
+	result := make([]string, 0)
 
 	for _, val := range m.pqArr {
-		// result = append(result, val)
-		fmt.Println(val)
+		vjson, _ := json.Marshal(val)
+		// fmt.Println(string(vjson))
+		result = append(result, string(vjson))
 	}
+	fmt.Println(result)
 }
 
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
