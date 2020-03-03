@@ -1,37 +1,31 @@
 package main
 
+import (
+	"github.com/andela-sjames/priorityQueue/pqueue"
+)
+
 func main() {
 
 	// Priority Queue ADT uses the HEAP Invariant implementation.
-	// heapArr := []int{4, 7, 8, 3, 2, 6, 5, 1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17} // Non Heap Array
+	maxheap := pqueue.NewHeap()
+	maxheap.InsertPriority("Visit China", 4)
+	maxheap.InsertPriority("Visit Japan", 7)
+	maxheap.InsertPriority("Eat Pizza", 8)
+	maxheap.InsertPriority("Run marathon", 3)
+	maxheap.InsertPriority("Buy Banana", 2)
+	maxheap.InsertPriority("Go Fishing", 6)
+	maxheap.InsertPriority("Skipping", 5)
+	maxheap.InsertPriority("Swimming", 1)
+	maxheap.InsertPriority("Go Kart", 3)
+	maxheap.InsertPriority("Ice Skating", 5)
+	maxheap.InsertPriority("Do Kung Fu", 4)
+	maxheap.InsertPriority("Watch Netflix", 13)
+	maxheap.InsertPriority("Get a boyfriend", 10)
+	maxheap.InsertPriority("Visit France", 21)
+	maxheap.InsertPriority("Study Espanol", 8)
+	maxheap.InsertPriority("Buy a country", 15)
+	maxheap.InsertPriority("Share the money", 17)
 
-	// pqArr := []pqueue.PItem{
-	// 	{Item: "Visit China", Priority: 4},
-	// 	{Item: "Visit Japan", Priority: 7},
-	// 	{Item: "Eat Pizza", Priority: 8},
-	// 	{Item: "Run marathon", Priority: 3},
-	// 	{Item: "Buy Banana", Priority: 2},
-	// 	{Item: "Go Fishing", Priority: 6},
-	// 	{Item: "Skipping", Priority: 5},
-	// 	{Item: "Swimming", Priority: 1},
-	// 	{Item: "Go Kart", Priority: 3},
-	// 	{Item: "Ice Skating", Priority: 5},
-	// 	{Item: "Do Kung Fu", Priority: 4},
-	// 	{Item: "Read Book", Priority: 6},
-	// 	{Item: "Watch Netflix", Priority: 13},
-	// 	{Item: "Get a boyfriend", Priority: 10},
-	// 	{Item: "Visit France", Priority: 9},
-	// 	{Item: "Study Espanol", Priority: 8},
-	// 	{Item: "Buy a country", Priority: 15},
-	// 	{Item: "Sahre the money", Priority: 17},
-	// }
-
-	// pqArr2 := []pqueue.PItem{
-	// 	{Item: "Visit China", Priority: 4},
-	// 	{Item: "Visit Japan", Priority: 7},
-	// }
-
-	// pqueue.BuildHeap(pqArr2, len(pqArr2))
-	// pqueue.PrintHeap(pqArr2, len(pqArr2))
+	maxheap.PrintHeap()
 
 }

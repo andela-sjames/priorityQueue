@@ -1,6 +1,8 @@
 package pqueue
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // MaxHeap struct defined to describe the Priority Queue ADT
 type MaxHeap struct {
@@ -29,7 +31,7 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 	// Insert an Item at the end of array and bubble back up to
 	// satisfy the heap invariant.
 
-	newPriority := &pItem{Item: "Visit China", Priority: 4}
+	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
 	m.buildHeap(m.pqArr, len(m.pqArr))
 }
@@ -78,17 +80,16 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 	for i := startIdx; i >= 0; i-- {
 		m.heapify(arr, i, size)
 	}
-
 }
 
 // PrintHeap function defined
-func (m *MaxHeap) PrintHeap(arr []pItem, size int) {
-	result := make([]pItem, 0)
-	for _, val := range arr {
-		result = append(result, val)
-	}
+func (m *MaxHeap) PrintHeap() {
+	// result := make([]*pItem, 0)
 
-	fmt.Println(result)
+	for _, val := range m.pqArr {
+		// result = append(result, val)
+		fmt.Println(val)
+	}
 }
 
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
