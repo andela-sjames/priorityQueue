@@ -27,7 +27,7 @@ type pItem struct {
 	Priority int
 }
 
-// InsertPriority insert a new item with priority in integer
+// InsertPriority inserts a new item with priority in integer
 func (m *MaxHeap) InsertPriority(item string, priority int) {
 	// Insert an Item at the end of array and bubble back up to
 	// satisfy the heap invariant.
@@ -35,6 +35,20 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
 	m.buildHeap(m.pqArr, len(m.pqArr))
+}
+
+// buildHeap function defined
+func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
+
+	// Index of the last non-leaf node
+	startIdx := (size / 2) - 1
+
+	// Perform reverse level order traversal
+	// from last non-leaf node and heapify
+	// each node
+	for i := startIdx; i >= 0; i-- {
+		m.heapify(arr, i, size)
+	}
 }
 
 // To heapify a subtree rooted with node i (rootIndex)
@@ -66,20 +80,6 @@ func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
 
 		// recursively heapify the affected sub-tree
 		m.heapify(arr, largest, size)
-	}
-}
-
-// buildHeap function defined
-func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
-
-	// Index of the last non-leaf node
-	startIdx := (size / 2) - 1
-
-	// Perform reverse level order traversal
-	// from last non-leaf node and heapify
-	// each node
-	for i := startIdx; i >= 0; i-- {
-		m.heapify(arr, i, size)
 	}
 }
 
