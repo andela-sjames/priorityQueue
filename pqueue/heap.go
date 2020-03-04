@@ -5,16 +5,17 @@ import (
 	"fmt"
 )
 
-type lookupTable map[int][]int
-
 // MaxHeap struct defined to describe the Priority Queue ADT
 type MaxHeap struct {
 	pqArr []*pItem
+	table map[int][]int
 }
 
 // NewHeap returns a new MaxHeap struct
 func NewHeap() *MaxHeap {
-	return &MaxHeap{}
+	return &MaxHeap{
+		table: make(map[int][]int),
+	}
 }
 
 type node struct {
@@ -59,6 +60,36 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 	// each node
 	for i := startIdx; i >= 0; i-- {
 		m.heapify(arr, i, size)
+	}
+}
+
+func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
+	var leftIndex int
+	var rightIndex int
+
+	var largest int
+
+	largest = rootIndex
+
+	leftIndex = 2*rootIndex + 1
+	rightIndex = 2*rootIndex + 2
+
+	// if the left child is larger than root
+	if leftIndex < size && arr[leftIndex].Priority > arr[largest].Priority {
+		largest = leftIndex
+	}
+
+	// if the right child is larger than largest so far
+	if rightIndex < size && arr[rightIndex].Priority > arr[largest].Priority {
+		largest = rightIndex
+	}
+
+	// if the largest is not root
+	if largest != rootIndex {
+		m.swap(arr, rootIndex, largest)
+
+		// recursively heapify the affected sub-tree
+		m.heapify(arr, largest, size)
 	}
 }
 
@@ -113,12 +144,12 @@ func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	arr[y] = tmp
 }
 
-// RemoveQueue defined to remove an item from the heap
-func RemoveQueue() {
+// RemovePriority defined to remove an item from the heap
+func RemovePriority() {
 
 }
 
-// PollQueue defined to get the top element from the heap
-func PollQueue() {
+// PollPriority defined to get the top element from the heap
+func PollPriority() {
 
 }
