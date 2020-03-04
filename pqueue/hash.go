@@ -12,10 +12,16 @@ var hashTable = struct {
 	m htable
 }{m: make(htable)}
 
-// InsertTable struct defined
-func InsertTable(priority, index int) {
+// AddToTable struct defined
+func AddToTable(priority, index int) {
 
-	// val == array, key == priority
+	/**
+	If the value does not exist, add an new index
+	to the array and make a new key, pair
+	otherwise, get the exiting value(array),
+	update it (to avoid collision) and update the key, pair
+	i.e. key = updated_array_value
+	*/
 	arr := make([]int, 0)
 
 	hashTable.Lock()
