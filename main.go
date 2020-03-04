@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/andela-sjames/priorityQueue/pqueue"
 )
 
@@ -26,6 +28,8 @@ func main() {
 	maxheap.InsertPriority("Buy a country", 15)
 	maxheap.InsertPriority("Share the money", 17)
 
-	maxheap.PrintHeap()
+	item, _ := maxheap.ShowPriority()
+	fmt.Println(item, "The priority")
 
+	// maxheap.PrintHeap()
 }

@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+type lookupTable map[int][]int
+
 // MaxHeap struct defined to describe the Priority Queue ADT
 type MaxHeap struct {
 	pqArr []*pItem
@@ -35,6 +37,15 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
 	m.buildHeap(m.pqArr, len(m.pqArr))
+}
+
+// ShowPriority returns the highest priority but does
+// not remove it from the priority queue
+func (m *MaxHeap) ShowPriority() (string, int) {
+	priorityOne := m.pqArr[0]
+
+	// fmt.Printf("%v\n", priorityOne)
+	return priorityOne.Item, priorityOne.Priority
 }
 
 // buildHeap function defined
