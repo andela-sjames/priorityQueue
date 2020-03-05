@@ -48,6 +48,9 @@ func GetFromTable(priority int) int {
 	var result int
 	var x int
 
+	HashTable.Lock()
+	defer HashTable.Unlock()
+
 	if val, exist := HashTable.m[priority]; exist {
 		if len(val) == 1 {
 			result = val[0]
@@ -63,6 +66,10 @@ func GetFromTable(priority int) int {
 
 // DeleteFromTable struct defined
 func DeleteFromTable(priority int) {
+
+	HashTable.Lock()
+	defer HashTable.Unlock()
+
 	if _, exist := HashTable.m[priority]; exist {
 		delete(HashTable.m, priority)
 	}
