@@ -60,3 +60,10 @@ func GetFromTable(priority int) int {
 	}
 	return result
 }
+
+// DeleteFromTable struct defined
+func DeleteFromTable(priority int) {
+	if _, exist := HashTable.m[priority]; exist {
+		delete(HashTable.m, priority)
+	}
+}
