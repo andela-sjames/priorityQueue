@@ -1,6 +1,7 @@
 package pqueue
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -22,7 +23,7 @@ var HashTable = struct {
 }{m: make(htable)}
 
 // AddToTable struct defined
-// If the value does not exist, add an new index
+// If the value does not exist, add a new index
 // to the array and make a new key, pair
 // otherwise, get the exiting value(array),
 // update it (to avoid collision) and update the key, pair
@@ -44,6 +45,7 @@ func AddToTable(priority, index int) {
 }
 
 // GetFromTable struct defined
+// returns the index of the priority
 func GetFromTable(priority int) int {
 	var result int
 	var x int
@@ -73,4 +75,9 @@ func DeleteFromTable(priority int) {
 	if _, exist := HashTable.m[priority]; exist {
 		delete(HashTable.m, priority)
 	}
+}
+
+// ShowHashTable show the content of the hash table
+func ShowHashTable() {
+	fmt.Println(HashTable.m)
 }

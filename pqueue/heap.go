@@ -59,7 +59,7 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 	// from last non-leaf node and heapify
 	// each node
 	for i := startIdx; i >= 0; i-- {
-		m.heapify(arr, i, size)
+		m.hashHeapify(arr, i, size)
 	}
 }
 
@@ -70,6 +70,7 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	var largest int
 
 	largest = rootIndex
+	AddToTable(arr[largest].Priority, largest)
 
 	leftIndex = 2*rootIndex + 1
 	rightIndex = 2*rootIndex + 2
@@ -77,11 +78,13 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	// if the left child is larger than root
 	if leftIndex < size && arr[leftIndex].Priority > arr[largest].Priority {
 		largest = leftIndex
+		AddToTable(arr[largest].Priority, largest)
 	}
 
 	// if the right child is larger than largest so far
 	if rightIndex < size && arr[rightIndex].Priority > arr[largest].Priority {
 		largest = rightIndex
+		AddToTable(arr[largest].Priority, largest)
 	}
 
 	// if the largest is not root
@@ -140,8 +143,14 @@ func (m *MaxHeap) PrintHeap() {
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
+	idx := GetFromTable(arr[x].Priority)
+	idy := GetFromTable(arr[y].Priority)
+
 	arr[x] = arr[y]
+	AddToTable(arr[x].Priority, idy)
+
 	arr[y] = tmp
+	AddToTable(arr[y].Priority, idx)
 }
 
 // RemovePriority defined to remove an item from the heap
