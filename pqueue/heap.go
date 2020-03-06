@@ -9,6 +9,7 @@ import (
 type MaxHeap struct {
 	pqArr []*pItem
 	table map[int][]int
+	count int
 }
 
 // NewHeap returns a new MaxHeap struct
@@ -37,7 +38,8 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
-	m.buildHeap(m.pqArr, len(m.pqArr))
+	m.count++
+	m.buildHeap(m.pqArr, m.count)
 }
 
 // ShowPriority returns the highest priority but does
@@ -66,25 +68,31 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
-
 	var largest int
 
 	largest = rootIndex
+
 	AddToTable(arr[largest].Priority, largest)
 
 	leftIndex = 2*rootIndex + 1
 	rightIndex = 2*rootIndex + 2
 
+	if m.count > leftIndex {
+		AddToTable(arr[leftIndex].Priority, leftIndex)
+	}
+
+	if m.count > rightIndex {
+		AddToTable(arr[rightIndex].Priority, rightIndex)
+	}
+
 	// if the left child is larger than root
 	if leftIndex < size && arr[leftIndex].Priority > arr[largest].Priority {
 		largest = leftIndex
-		AddToTable(arr[largest].Priority, largest)
 	}
 
 	// if the right child is larger than largest so far
 	if rightIndex < size && arr[rightIndex].Priority > arr[largest].Priority {
 		largest = rightIndex
-		AddToTable(arr[largest].Priority, largest)
 	}
 
 	// if the largest is not root
@@ -92,7 +100,7 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 		m.swap(arr, rootIndex, largest)
 
 		// recursively heapify the affected sub-tree
-		m.heapify(arr, largest, size)
+		m.hashHeapify(arr, largest, size)
 	}
 }
 
@@ -134,23 +142,22 @@ func (m *MaxHeap) PrintHeap() {
 
 	for _, val := range m.pqArr {
 		vjson, _ := json.Marshal(val)
-		// fmt.Println(string(vjson))
 		result = append(result, string(vjson))
 	}
-	fmt.Println(result)
+	fmt.Println(result, m.count)
 }
 
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
-	idx := GetFromTable(arr[x].Priority)
-	idy := GetFromTable(arr[y].Priority)
+	idx := GetFromTable(arr[x].Priority, x)
+	idy := GetFromTable(arr[y].Priority, y)
 
 	arr[x] = arr[y]
-	AddToTable(arr[x].Priority, idy)
+	AddToTable(arr[x].Priority, idx)
 
 	arr[y] = tmp
-	AddToTable(arr[y].Priority, idx)
+	AddToTable(arr[y].Priority, idy)
 }
 
 // RemovePriority defined to remove an item from the heap

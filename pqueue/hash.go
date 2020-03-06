@@ -39,18 +39,19 @@ func AddToTable(priority, index int) {
 		arr = append(arr, index)
 		HashTable.m[priority] = arr
 	} else {
+		// avoid repeated entry
 		if ok := intInSlice(index, val); !ok {
 			val = append(val, index)
+			HashTable.m[priority] = val
 		}
-		HashTable.m[priority] = val
+
 	}
 }
 
 // GetFromTable struct defined
 // returns the index of the priority
-func GetFromTable(priority int) int {
+func GetFromTable(priority int, index int) int {
 	var result int
-	var x int
 
 	HashTable.Lock()
 	defer HashTable.Unlock()
@@ -58,11 +59,17 @@ func GetFromTable(priority int) int {
 	if val, exist := HashTable.m[priority]; exist {
 		if len(val) == 1 {
 			result = val[0]
-			val = nil
+			HashTable.m[priority] = nil
 		} else {
-			x, val = val[0], val[1:]
-			HashTable.m[priority] = val
-			result = x
+			// get the value x from the slice
+			var idx int
+			var arr []int
+			idx, arr = removeFromSlice(index, val)
+			if idx == index {
+				HashTable.m[priority] = arr
+				result = idx
+			}
+
 		}
 	}
 	return result
@@ -91,4 +98,15 @@ func intInSlice(a int, list []int) bool {
 		}
 	}
 	return false
+}
+
+func removeFromSlice(itm int, list []int) (int, []int) {
+	for i := range list {
+		if list[i] == itm {
+			// get&remove itm from slice
+			list = append(list[:i], list[i+1:]...)
+			return itm, list
+		}
+	}
+	return -1, list
 }
