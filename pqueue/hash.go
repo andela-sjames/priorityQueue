@@ -39,7 +39,9 @@ func AddToTable(priority, index int) {
 		arr = append(arr, index)
 		HashTable.m[priority] = arr
 	} else {
-		val = append(val, index)
+		if ok := intInSlice(index, val); !ok {
+			val = append(val, index)
+		}
 		HashTable.m[priority] = val
 	}
 }
@@ -80,4 +82,13 @@ func DeleteFromTable(priority int) {
 // ShowHashTable show the content of the hash table
 func ShowHashTable() {
 	fmt.Println(HashTable.m)
+}
+
+func intInSlice(a int, list []int) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
