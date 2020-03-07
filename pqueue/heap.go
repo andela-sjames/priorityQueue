@@ -161,11 +161,28 @@ func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 }
 
 // RemovePriority defined to remove an item from the heap
+// by specified priority
 func RemovePriority() {
 
 }
 
-// PollPriority defined to get the top element from the heap
-func PollPriority() {
+// Poll defined to remove the top element from the heap
+func (m *MaxHeap) Poll() (string, int) {
+
+	// swap root index with last index
+	// i.e array[zero_index] <> array[last_index]
+	// Pop the last_index from the heap and heapify
+
+	zeroIndex := 0
+	lastIndex := m.count - 1
+	m.swap(m.pqArr, zeroIndex, lastIndex)
+
+	p, arr := m.pqArr[m.count-1], m.pqArr[:m.count-1]
+	m.pqArr = arr
+
+	m.count--
+	m.buildHeap(m.pqArr, m.count)
+
+	return p.Item, p.Priority
 
 }

@@ -13,10 +13,10 @@ func main() {
 	maxheap.InsertPriority("Visit China", 2)
 	maxheap.InsertPriority("Visit Japan", 7)
 	maxheap.InsertPriority("Eat Pizza", 2)
-	maxheap.InsertPriority("Run marathon", 3)
-	maxheap.InsertPriority("Buy Banana", 11)
-	maxheap.InsertPriority("Go Fishing", 7)
-	maxheap.InsertPriority("Skipping", 13)
+	maxheap.InsertPriority("Run marathon", 11)
+	maxheap.InsertPriority("Buy Banana", 7)
+	maxheap.InsertPriority("Go Fishing", 13)
+	maxheap.InsertPriority("Skipping", 2)
 
 	maxheap.InsertPriority("Swimming", 2)
 	maxheap.InsertPriority("Go Kart", 3)
@@ -33,6 +33,11 @@ func main() {
 	fmt.Println(item, p, "The priority")
 
 	// maxheap.PrintHeap()
+	pqueue.ShowHashTable()
+
+	item, p = maxheap.Poll()
+	fmt.Println(item, p, "The poll")
+
 	pqueue.ShowHashTable()
 
 }
