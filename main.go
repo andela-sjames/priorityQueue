@@ -39,5 +39,4 @@ func main() {
 	fmt.Println(item, p, "The poll")
 
 	pqueue.ShowHashTable()
-
 }

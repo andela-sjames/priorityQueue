@@ -160,18 +160,14 @@ func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	AddToTable(arr[y].Priority, idy)
 }
 
-// RemovePriority defined to remove an item from the heap
-// by specified priority
-func RemovePriority() {
-
-}
-
 // Poll defined to remove the top element from the heap
 func (m *MaxHeap) Poll() (string, int) {
 
 	// swap root index with last index
-	// i.e array[zero_index] <> array[last_index]
-	// Pop the last_index from the heap and heapify
+	// i.e array[zero_index] <==> array[last_index]
+	// Pop the last_index from the heap
+	// reduce the count
+	// DeleteFromTable and heapify
 
 	zeroIndex := 0
 	lastIndex := m.count - 1
@@ -180,9 +176,22 @@ func (m *MaxHeap) Poll() (string, int) {
 	p, arr := m.pqArr[m.count-1], m.pqArr[:m.count-1]
 	m.pqArr = arr
 
+	// delete from table
+	DeleteFromTable(p.Priority)
+
 	m.count--
 	m.buildHeap(m.pqArr, m.count)
 
 	return p.Item, p.Priority
+}
+
+// Remove defined to remove an item from the heap
+// by specified priority
+func (m *MaxHeap) Remove(priority int) {
+	// get index to be removed from hashtable
+	// swap index with last_index
+	// pop index from heap and from hashtable
+	// reduce the count
+	// DeleteFromTable and heapify
 
 }
