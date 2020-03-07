@@ -75,6 +75,20 @@ func GetFromTable(priority int, index int) int {
 	return result
 }
 
+// PeekPriority uses the priority key given
+// to return the first item of the value
+// but does not delete from the hash table
+func PeekPriority(priority int) int {
+
+	HashTable.Lock()
+	defer HashTable.Unlock()
+
+	if val, exist := HashTable.m[priority]; exist {
+		return val[0]
+	}
+	return -1
+}
+
 // DeleteFromTable struct defined
 func DeleteFromTable(priority int) {
 

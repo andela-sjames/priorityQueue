@@ -187,11 +187,29 @@ func (m *MaxHeap) Poll() (string, int) {
 
 // Remove defined to remove an item from the heap
 // by specified priority
-func (m *MaxHeap) Remove(priority int) {
+func (m *MaxHeap) Remove(priority int) bool {
 	// get index to be removed from hashtable
 	// swap index with last_index
 	// pop index from heap and from hashtable
 	// reduce the count
 	// DeleteFromTable and heapify
 
+	priorityIndex := PeekPriority(priority)
+	if priorityIndex == -1 {
+		return false
+	}
+
+	lastIndex := m.count - 1
+	m.swap(m.pqArr, priorityIndex, lastIndex)
+
+	p, arr := m.pqArr[m.count-1], m.pqArr[:m.count-1]
+	m.pqArr = arr
+
+	// delete from table
+	DeleteFromTable(p.Priority)
+
+	m.count--
+	m.buildHeap(m.pqArr, m.count)
+
+	return true
 }

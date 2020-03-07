@@ -39,4 +39,9 @@ func main() {
 	fmt.Println(item, p, "The poll")
 
 	pqueue.ShowHashTable()
+
+	_ = maxheap.Remove(11)
+
+	pqueue.ShowHashTable()
+
 }
