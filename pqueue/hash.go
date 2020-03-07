@@ -7,15 +7,6 @@ import (
 
 type htable map[int][]int
 
-// Pop from queue
-// x, a = a[0], a[1:]
-
-// Pop from stack
-// x, a = a[len(a)-1], a[:len(a)-1]
-
-// Push
-// a = append(a, x)
-
 // HashTable struct defined
 var HashTable = struct {
 	sync.RWMutex
