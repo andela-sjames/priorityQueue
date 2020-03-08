@@ -8,21 +8,15 @@ import (
 // MaxHeap struct defined to describe the Priority Queue ADT
 type MaxHeap struct {
 	pqArr []*pItem
-	table map[int][]int
 	count int
+	table *HeapHash
 }
 
 // NewHeap returns a new MaxHeap struct
 func NewHeap() *MaxHeap {
 	return &MaxHeap{
-		table: make(map[int][]int),
+		table: NewHeapHash(),
 	}
-}
-
-type node struct {
-	key   int
-	left  *node
-	right *node
 }
 
 // pItem struct defined to describe a priority object
@@ -72,17 +66,17 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 
 	largest = rootIndex
 
-	AddToTable(arr[largest].Priority, largest)
+	m.table.AddToTable(arr[largest].Priority, largest)
 
 	leftIndex = 2*rootIndex + 1
 	rightIndex = 2*rootIndex + 2
 
 	if m.count > leftIndex {
-		AddToTable(arr[leftIndex].Priority, leftIndex)
+		m.table.AddToTable(arr[leftIndex].Priority, leftIndex)
 	}
 
 	if m.count > rightIndex {
-		AddToTable(arr[rightIndex].Priority, rightIndex)
+		m.table.AddToTable(arr[rightIndex].Priority, rightIndex)
 	}
 
 	// if the left child is larger than root
@@ -150,14 +144,14 @@ func (m *MaxHeap) PrintHeap() {
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 	// swap here dude.
 	tmp := arr[x]
-	idx := GetFromTable(arr[x].Priority, x)
-	idy := GetFromTable(arr[y].Priority, y)
+	idx := m.table.GetFromTable(arr[x].Priority, x)
+	idy := m.table.GetFromTable(arr[y].Priority, y)
 
 	arr[x] = arr[y]
-	AddToTable(arr[x].Priority, idx)
+	m.table.AddToTable(arr[x].Priority, idx)
 
 	arr[y] = tmp
-	AddToTable(arr[y].Priority, idy)
+	m.table.AddToTable(arr[y].Priority, idy)
 }
 
 // Poll defined to remove the top element from the heap
@@ -177,7 +171,7 @@ func (m *MaxHeap) Poll() (string, int) {
 	m.pqArr = arr
 
 	// delete from table
-	DeleteFromTable(p.Priority)
+	m.table.DeleteFromTable(p.Priority)
 
 	m.count--
 	m.buildHeap(m.pqArr, m.count)
@@ -194,7 +188,7 @@ func (m *MaxHeap) Remove(priority int) bool {
 	// reduce the count
 	// DeleteFromTable and heapify
 
-	priorityIndex := PeekPriority(priority)
+	priorityIndex := m.table.PeekPriority(priority)
 	if priorityIndex == -1 {
 		return false
 	}
@@ -206,10 +200,15 @@ func (m *MaxHeap) Remove(priority int) bool {
 	m.pqArr = arr
 
 	// delete from table
-	DeleteFromTable(p.Priority)
+	m.table.DeleteFromTable(p.Priority)
 
 	m.count--
 	m.buildHeap(m.pqArr, m.count)
 
 	return true
+}
+
+// ShowHashTable show the content of the hash table
+func (m *MaxHeap) ShowHashTable() {
+	m.table.ShowHashTable()
 }

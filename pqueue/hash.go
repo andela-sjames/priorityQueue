@@ -7,11 +7,20 @@ import (
 
 type htable map[int][]int
 
-// HashTable struct defined
-var HashTable = struct {
+// HeapHash defined to create hash table for Heap data structure
+// can be used for a min heap or max heap invariant.
+type HeapHash struct {
 	sync.RWMutex
 	m htable
-}{m: make(htable)}
+}
+
+// NewHeapHash defined to create a new
+// HeapHash object
+func NewHeapHash() *HeapHash {
+	h := &HeapHash{}
+	h.m = make(htable)
+	return h
+}
 
 // AddToTable struct defined
 // If the value does not exist, add a new index
@@ -19,21 +28,21 @@ var HashTable = struct {
 // otherwise, get the exiting value(array),
 // update it (to avoid collision) and update the key, pair
 // i.e. key = updated_array_value
-func AddToTable(priority, index int) {
+func (h *HeapHash) AddToTable(priority, index int) {
 
 	arr := make([]int, 0)
 
-	HashTable.Lock()
-	defer HashTable.Unlock()
+	h.Lock()
+	defer h.Unlock()
 
-	if val, exist := HashTable.m[priority]; !exist {
+	if val, exist := h.m[priority]; !exist {
 		arr = append(arr, index)
-		HashTable.m[priority] = arr
+		h.m[priority] = arr
 	} else {
 		// avoid repeated entry
-		if ok := intInSlice(index, val); !ok {
+		if ok := h.intInSlice(index, val); !ok {
 			val = append(val, index)
-			HashTable.m[priority] = val
+			h.m[priority] = val
 		}
 
 	}
@@ -41,23 +50,23 @@ func AddToTable(priority, index int) {
 
 // GetFromTable struct defined
 // returns the index of the priority
-func GetFromTable(priority int, index int) int {
+func (h *HeapHash) GetFromTable(priority int, index int) int {
 	var result int
 
-	HashTable.Lock()
-	defer HashTable.Unlock()
+	h.Lock()
+	defer h.Unlock()
 
-	if val, exist := HashTable.m[priority]; exist {
+	if val, exist := h.m[priority]; exist {
 		if len(val) == 1 {
 			result = val[0]
-			HashTable.m[priority] = nil
+			h.m[priority] = nil
 		} else {
 			// get the value x from the slice
 			var idx int
 			var arr []int
-			idx, arr = removeFromSlice(index, val)
+			idx, arr = h.removeFromSlice(index, val)
 			if idx == index {
-				HashTable.m[priority] = arr
+				h.m[priority] = arr
 				result = idx
 			}
 
@@ -69,34 +78,34 @@ func GetFromTable(priority int, index int) int {
 // PeekPriority uses the priority key given
 // to return the first item of the value
 // but does not delete from the hash table
-func PeekPriority(priority int) int {
+func (h *HeapHash) PeekPriority(priority int) int {
 
-	HashTable.Lock()
-	defer HashTable.Unlock()
+	h.Lock()
+	defer h.Unlock()
 
-	if val, exist := HashTable.m[priority]; exist {
+	if val, exist := h.m[priority]; exist {
 		return val[0]
 	}
 	return -1
 }
 
 // DeleteFromTable struct defined
-func DeleteFromTable(priority int) {
+func (h *HeapHash) DeleteFromTable(priority int) {
 
-	HashTable.Lock()
-	defer HashTable.Unlock()
+	h.Lock()
+	defer h.Unlock()
 
-	if _, exist := HashTable.m[priority]; exist {
-		delete(HashTable.m, priority)
+	if _, exist := h.m[priority]; exist {
+		delete(h.m, priority)
 	}
 }
 
 // ShowHashTable show the content of the hash table
-func ShowHashTable() {
-	fmt.Println(HashTable.m)
+func (h *HeapHash) ShowHashTable() {
+	fmt.Println(h.m)
 }
 
-func intInSlice(a int, list []int) bool {
+func (h *HeapHash) intInSlice(a int, list []int) bool {
 	for _, b := range list {
 		if b == a {
 			return true
@@ -105,7 +114,7 @@ func intInSlice(a int, list []int) bool {
 	return false
 }
 
-func removeFromSlice(itm int, list []int) (int, []int) {
+func (h *HeapHash) removeFromSlice(itm int, list []int) (int, []int) {
 	for i := range list {
 		if list[i] == itm {
 			// get&remove itm from slice
