@@ -19,12 +19,6 @@ func NewHeap() *MaxHeap {
 	}
 }
 
-type node struct {
-	key   int
-	left  *node
-	right *node
-}
-
 // pItem struct defined to describe a priority object
 type pItem struct {
 	Item     string
