@@ -33,15 +33,15 @@ func main() {
 	fmt.Println(item, p, "The priority")
 
 	// maxheap.PrintHeap()
-	pqueue.ShowHashTable()
+	maxheap.ShowHashTable()
 
 	item, p = maxheap.Poll()
 	fmt.Println(item, p, "The poll")
 
-	pqueue.ShowHashTable()
+	maxheap.ShowHashTable()
 
 	_ = maxheap.Remove(11)
 
-	pqueue.ShowHashTable()
+	maxheap.ShowHashTable()
 
 }

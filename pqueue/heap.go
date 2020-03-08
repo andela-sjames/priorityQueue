@@ -213,3 +213,8 @@ func (m *MaxHeap) Remove(priority int) bool {
 
 	return true
 }
+
+// ShowHashTable show the content of the hash table
+func (m *MaxHeap) ShowHashTable() {
+	m.table.ShowHashTable()
+}
