@@ -1,24 +1,24 @@
 package pqueue
 
 import (
-	"fmt"
 	"sync"
 )
 
-type htable map[int][]int
+// Htable struct defines the hash table data type
+type Htable map[int][]int
 
 // HeapHash defined to create hash table for Heap data structure
 // can be used for a min heap or max heap invariant.
 type HeapHash struct {
 	sync.RWMutex
-	m htable
+	m Htable
 }
 
 // NewHeapHash defined to create a new
 // HeapHash object
 func NewHeapHash() *HeapHash {
 	h := &HeapHash{}
-	h.m = make(htable)
+	h.m = make(Htable)
 	return h
 }
 
@@ -100,9 +100,9 @@ func (h *HeapHash) DeleteFromTable(priority int) {
 	}
 }
 
-// ShowHashTable show the content of the hash table
-func (h *HeapHash) ShowHashTable() {
-	fmt.Println(h.m)
+// GetHashTable show the content of the hash table
+func (h *HeapHash) GetHashTable() *Htable {
+	return &h.m
 }
 
 func (h *HeapHash) intInSlice(a int, list []int) bool {

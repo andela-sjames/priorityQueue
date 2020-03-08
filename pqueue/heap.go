@@ -2,7 +2,6 @@ package pqueue
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // MaxHeap struct defined to describe the Priority Queue ADT
@@ -131,14 +130,14 @@ func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
 }
 
 // PrintHeap function defined
-func (m *MaxHeap) PrintHeap() {
+func (m *MaxHeap) ShowHeap() []string {
 	result := make([]string, 0)
 
 	for _, val := range m.pqArr {
 		vjson, _ := json.Marshal(val)
 		result = append(result, string(vjson))
 	}
-	fmt.Println(result, m.count)
+	return result
 }
 
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
@@ -209,8 +208,9 @@ func (m *MaxHeap) Remove(priority int) bool {
 }
 
 // ShowHashTable show the content of the hash table
-func (m *MaxHeap) ShowHashTable() {
-	m.table.ShowHashTable()
+func (m *MaxHeap) ShowHashTable() *Htable {
+	t := m.table.GetHashTable()
+	return t
 }
 
 // Length return the length of the priority queue

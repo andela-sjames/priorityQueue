@@ -32,16 +32,19 @@ func main() {
 	item, p := maxheap.ShowPriority()
 	fmt.Println(item, p, "The priority")
 
-	// maxheap.PrintHeap()
-	maxheap.ShowHashTable()
+	// s := maxheap.ShowHeap()
+	// fmt.Println(s)
+
+	t := maxheap.ShowHashTable()
+	fmt.Println(t)
 
 	item, p = maxheap.Poll()
 	fmt.Println(item, p, "The poll")
 
-	maxheap.ShowHashTable()
+	t = maxheap.ShowHashTable()
+	fmt.Println(t)
 
 	_ = maxheap.Remove(11)
 
 	maxheap.ShowHashTable()
-
 }
