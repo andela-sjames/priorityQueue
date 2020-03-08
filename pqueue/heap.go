@@ -212,3 +212,8 @@ func (m *MaxHeap) Remove(priority int) bool {
 func (m *MaxHeap) ShowHashTable() {
 	m.table.ShowHashTable()
 }
+
+// Length return the length of the priority queue
+func (m *MaxHeap) Length() int {
+	return m.count
+}
