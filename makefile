@@ -1,2 +1,2 @@
 test:
-	go test ./pqueue -v
+	go test -v
