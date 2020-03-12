@@ -1,6 +1,8 @@
 # priorityQueue
 
-Implementation of the Priority Queue ADT using Binary Heap Invariant
+Implementation of the Priority Queue ADT using the Binary Heap Invariant
+
+### QUICK NOTE ON THE IMPLEMENTATION
 
 Usage:
 
@@ -28,8 +30,8 @@ func main() {
     item, p := maxheap.ShowPriority()
     fmt.Println(item, p, "The priority")
 
-    // s := maxheap.ShowHeap()
-    // fmt.Println(s)
+    s := maxheap.ShowHeap()
+    fmt.Println(s)
 
     t := maxheap.ShowHashTable()
     fmt.Println(t)
@@ -42,6 +44,7 @@ func main() {
 
     _ = maxheap.Remove(11)
 
-    maxheap.ShowHashTable()
+     t = maxheap.ShowHashTable()
+    fmt.Println(t)
 }
 ```
