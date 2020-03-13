@@ -57,6 +57,8 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 	}
 }
 
+// Update hashtable and heapify a subtree rooted with node i (rootIndex)
+// which is an index in arr[]. size is the number of items in the heap.
 func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
@@ -96,7 +98,7 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	}
 }
 
-// To heapify a subtree rooted with node i (rootIndex)
+// heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the size of the heap.
 func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
 	var leftIndex int
