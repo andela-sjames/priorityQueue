@@ -18,13 +18,12 @@ package main
 
 import (
     "fmt"
-    "github.com/andela-sjames/priorityQueue/pqueue"
+    pqueue "github.com/andela-sjames/priorityQueue"
 )
 
 func main() {
-
-    // Priority Queue ADT uses the HEAP Invariant implementation.
     maxheap := pqueue.NewHeap()
+
     maxheap.InsertPriority("Visit China", 2)
     maxheap.InsertPriority("Visit Japan", 7)
     maxheap.InsertPriority("Eat Pizza", 2)

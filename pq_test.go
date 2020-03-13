@@ -1,13 +1,15 @@
-package pqueue
+package pqueue_test
 
 import (
 	"testing"
+
+	pqueue "github.com/andela-sjames/priorityQueue"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPriorityQueue(t *testing.T) {
-	maxheap := NewHeap()
+	maxheap := pqueue.NewHeap()
 	assert := assert.New(t)
 
 	maxheap.InsertPriority("Visit China", 2)
