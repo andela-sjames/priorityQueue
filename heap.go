@@ -98,38 +98,6 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	}
 }
 
-// heapify a subtree rooted with node i (rootIndex)
-// which is an index in arr[]. size is the size of the heap.
-func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
-	var leftIndex int
-	var rightIndex int
-
-	var largest int
-
-	largest = rootIndex
-
-	leftIndex = 2*rootIndex + 1
-	rightIndex = 2*rootIndex + 2
-
-	// if the left child is larger than root
-	if leftIndex < size && arr[leftIndex].Priority > arr[largest].Priority {
-		largest = leftIndex
-	}
-
-	// if the right child is larger than largest so far
-	if rightIndex < size && arr[rightIndex].Priority > arr[largest].Priority {
-		largest = rightIndex
-	}
-
-	// if the largest is not root
-	if largest != rootIndex {
-		m.swap(arr, rootIndex, largest)
-
-		// recursively heapify the affected sub-tree
-		m.heapify(arr, largest, size)
-	}
-}
-
 // ShowHeap function defined
 func (m *MaxHeap) ShowHeap() []string {
 	result := make([]string, 0)
