@@ -2,7 +2,7 @@
 
 Implementation of the Priority Queue ADT using the Binary Heap Invariant
 
-### QUICK NOTE ON THE IMPLEMENTATION
+## QUICK NOTE ON THE IMPLEMENTATION
 
 Usage:
 
