@@ -1,8 +1,14 @@
 # priorityQueue
 
-Implementation of the Priority Queue ADT using the Binary Heap Invariant
+Implementation of the Priority Queue Abstract Data Type (ADT) using the Binary Heap Invariant.
 
-## QUICK NOTE ON THE IMPLEMENTATION
+## QUICK NOTE
+
+In addition to the Binary Heap Implementation, this project makes use of a Hash table which gives us a time complexity
+of O(1) time for search in comparison to 0(n) time for search without a Hash table.
+
+An ADT simply defines the behaviour that a DataType(priorityQueue) should have; the Binary Heap Invariant gives
+us a better time complexity than using a linked list or an unsorted list.
 
 Usage:
 
