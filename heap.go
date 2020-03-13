@@ -40,7 +40,6 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 func (m *MaxHeap) ShowPriority() (string, int) {
 	priorityOne := m.pqArr[0]
 
-	// fmt.Printf("%v\n", priorityOne)
 	return priorityOne.Item, priorityOne.Priority
 }
 
@@ -129,7 +128,7 @@ func (m *MaxHeap) heapify(arr []*pItem, rootIndex, size int) {
 	}
 }
 
-// PrintHeap function defined
+// ShowHeap function defined
 func (m *MaxHeap) ShowHeap() []string {
 	result := make([]string, 0)
 
