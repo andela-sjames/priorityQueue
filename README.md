@@ -10,7 +10,7 @@ of O(1) time for search in comparison to 0(n) time for search without a Hash tab
 An ADT simply defines the behaviour that a DataType(priorityQueue) should have; the Binary Heap Invariant gives
 us a better time complexity than using a linked list or an unsorted list.
 
-Usage:
+Usage: <https://play.golang.org/p/5P0_-W49fB3>
 
 ```go
 
