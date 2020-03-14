@@ -24,13 +24,16 @@ type pItem struct {
 	Priority int
 }
 
-// InsertPriority inserts a new item with priority in integer
+// InsertPriority inserts a new item with priority p in integer.
+// It insert an Item at the end of array and bubbles back up to
+// satisfy the binary heap invariant.
 func (m *MaxHeap) InsertPriority(item string, priority int) {
-	// Insert an Item at the end of array and bubble back up to
-	// satisfy the heap invariant.
 
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
+
+	// use a count to avoid looping through the heap
+	// to get the length. O(1) advantage
 	m.count++
 	m.buildHeap(m.pqArr, m.count)
 }
@@ -39,7 +42,6 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 // not remove it from the priority queue
 func (m *MaxHeap) ShowPriority() (string, int) {
 	priorityOne := m.pqArr[0]
-
 	return priorityOne.Item, priorityOne.Priority
 }
 
@@ -110,7 +112,7 @@ func (m *MaxHeap) ShowHeap() []string {
 }
 
 func (m *MaxHeap) swap(arr []*pItem, x, y int) {
-	// swap here dude.
+	// swap and update hashtable while at it.
 	tmp := arr[x]
 	idx := m.table.GetFromTable(arr[x].Priority, x)
 	idy := m.table.GetFromTable(arr[y].Priority, y)
