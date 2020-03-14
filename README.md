@@ -53,5 +53,4 @@ func main() {
      t = maxheap.ShowHashTable()
     fmt.Println(t) // &map[2:[3 2 4] 7:[0 1]]
 }
-}
 ```
