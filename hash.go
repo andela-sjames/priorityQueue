@@ -4,11 +4,11 @@ import (
 	"sync"
 )
 
-// Htable struct defines the hash table data type
+// Htable type defines the hash table datatype
 type Htable map[int][]int
 
-// HeapHash defined to create hash table for Heap data structure
-// can be used for a min heap or max heap invariant.
+// HeapHash defined to create an Amortised hash-table for the Heap data structure
+// and can be used for a min or max heap invariant.
 type HeapHash struct {
 	sync.RWMutex
 	m Htable
@@ -36,20 +36,17 @@ func (h *HeapHash) AddToTable(priority, index int) {
 	defer h.Unlock()
 
 	if val, exist := h.m[priority]; !exist {
-		arr = append(arr, index)
-		h.m[priority] = arr
+		h.m[priority] = append(arr, index)
 	} else {
 		// avoid repeated entry
 		if ok := h.intInSlice(index, val); !ok {
-			val = append(val, index)
-			h.m[priority] = val
+			h.m[priority] = append(val, index)
 		}
-
 	}
 }
 
 // GetFromTable struct defined
-// returns the index of the priority
+// returns the index of the priority in the binary heap
 func (h *HeapHash) GetFromTable(priority int, index int) int {
 	var result int
 
@@ -61,7 +58,6 @@ func (h *HeapHash) GetFromTable(priority int, index int) int {
 			result = val[0]
 			h.m[priority] = nil
 		} else {
-			// get the value x from the slice
 			var idx int
 			var arr []int
 			idx, arr = h.removeFromSlice(index, val)
@@ -69,7 +65,6 @@ func (h *HeapHash) GetFromTable(priority int, index int) int {
 				h.m[priority] = arr
 				result = idx
 			}
-
 		}
 	}
 	return result
