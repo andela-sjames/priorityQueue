@@ -33,23 +33,25 @@ func main() {
     maxheap.InsertPriority("Skipping", 2)
 
     item, p := maxheap.ShowPriority()
-    fmt.Println(item, p, "The priority")
+    fmt.Println(item, p, "The priority") // Go Fishing 13 The priority
 
     s := maxheap.ShowHeap()
     fmt.Println(s)
+    // [{"Item":"Go Fishing","Priority":13} {"Item":"Visit Japan","Priority":7} {"Item":"Run marathon","Priority":11} {"Item":"Visit China","Priority":2} {"Item":"Buy Banana","Priority":7} {"Item":"Eat Pizza","Priority":2} {"Item":"Skipping","Priority":2}]
 
     t := maxheap.ShowHashTable()
-    fmt.Println(t)
+    fmt.Println(t) // &map[2:[3 5 6] 7:[1 4] 11:[2] 13:[0]]
 
     item, p = maxheap.Poll()
-    fmt.Println(item, p, "The poll")
+    fmt.Println(item, p, "The poll") // Go Fishing 13 The poll
 
     t = maxheap.ShowHashTable()
-    fmt.Println(t)
+    fmt.Println(t) // &map[2:[3 5 2] 7:[1 4] 11:[0]]
 
     _ = maxheap.Remove(11)
 
      t = maxheap.ShowHashTable()
-    fmt.Println(t)
+    fmt.Println(t) // &map[2:[3 2 4] 7:[0 1]]
+}
 }
 ```
