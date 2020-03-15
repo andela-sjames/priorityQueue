@@ -50,7 +50,10 @@ func main() {
 
     _ = maxheap.Remove(11)
 
-     t = maxheap.ShowHashTable()
+    t = maxheap.ShowHashTable()
     fmt.Println(t) // &map[2:[3 2 4] 7:[0 1]]
+
+    l := maxheap.Length()
+    fmt.Println(t) // 5
 }
 ```
