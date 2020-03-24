@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPriorityQueue(t *testing.T) {
-	// defaults to max heap if Max option is
-	// not set to false
+func TestMaxPriorityQueue(t *testing.T) {
+	// defaults to max heap if Min option is
+	// not set to true
 	maxheap := pqueue.NewHeap(pqueue.Options{})
 	assert := assert.New(t)
 
@@ -25,8 +25,8 @@ func TestPriorityQueue(t *testing.T) {
 
 	t.Run("ShowPriority should return item and priority", func(t *testing.T) {
 		item, p := maxheap.ShowPriority()
-		assert.Equal(item, "Run marathon")
-		assert.Equal(p, 11)
+		assert.Equal("Run marathon", item)
+		assert.Equal(11, p)
 
 	})
 
@@ -36,21 +36,21 @@ func TestPriorityQueue(t *testing.T) {
 		maxheap.InsertPriority("Visit France", 21)
 
 		item, p := maxheap.Poll()
-		assert.Equal(item, "Visit France")
-		assert.Equal(p, 21)
+		assert.Equal("Visit France", item)
+		assert.Equal(21, p)
 
 	})
 
 	t.Run("Remove an object from the heap", func(t *testing.T) {
 
 		l := maxheap.Length()
-		assert.Equal(l, 10)
+		assert.Equal(10, l)
 
 		done := maxheap.Remove(11)
 
 		l = maxheap.Length()
-		assert.Equal(done, true)
-		assert.Equal(l, 9)
+		assert.Equal(true, done)
+		assert.Equal(9, l)
 	})
 
 	t.Run("Heap table can be returned", func(t *testing.T) {
@@ -61,6 +61,65 @@ func TestPriorityQueue(t *testing.T) {
 
 	t.Run("Heap content can be shown", func(t *testing.T) {
 		s := maxheap.ShowHeap()
+		assert.NotNil(s)
+	})
+}
+
+func TestMinPriorityQueue(t *testing.T) {
+
+	// Set Min option is to true for minheap
+	minheap := pqueue.NewHeap(pqueue.Options{
+		Min: true,
+	})
+	assert := assert.New(t)
+
+	minheap.InsertPriority("Visit China", 2)
+	minheap.InsertPriority("Visit Japan", 7)
+	minheap.InsertPriority("Eat Pizza", 2)
+	minheap.InsertPriority("Run marathon", 11)
+	minheap.InsertPriority("Go Kart", 3)
+	minheap.InsertPriority("Ice Skating", 5)
+	minheap.InsertPriority("Do Kung Fu", 4)
+	minheap.InsertPriority("Get a boyfriend", 10)
+
+	t.Run("ShowPriority should return item and priority", func(t *testing.T) {
+		item, p := minheap.ShowPriority()
+		assert.Equal("Visit China", item)
+		assert.Equal(2, p)
+
+	})
+
+	t.Run("Poll an object from the queue", func(t *testing.T) {
+		minheap.InsertPriority("Watch Netflix", 13)
+		minheap.InsertPriority("Get a boyfriend", 10)
+		minheap.InsertPriority("Visit France", 21)
+
+		item, p := minheap.Poll()
+		assert.Equal("Visit China", item)
+		assert.Equal(2, p)
+
+	})
+
+	t.Run("Remove an object from the heap", func(t *testing.T) {
+
+		l := minheap.Length()
+		assert.Equal(10, l)
+
+		done := minheap.Remove(11)
+
+		l = minheap.Length()
+		assert.Equal(true, done)
+		assert.Equal(9, l)
+	})
+
+	t.Run("Heap table can be returned", func(t *testing.T) {
+		v := minheap.ShowHashTable()
+		assert.NotNil(v)
+
+	})
+
+	t.Run("Heap content can be shown", func(t *testing.T) {
+		s := minheap.ShowHeap()
 		assert.NotNil(s)
 	})
 }

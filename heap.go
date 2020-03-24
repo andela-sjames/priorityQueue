@@ -6,12 +6,12 @@ import (
 
 // Options for QueueHeap
 type Options struct {
-	Max bool // flag set to either create a max heap or min heap
+	Min bool // flag set to either create a max heap or min heap
 }
 
 // QueueHeap struct defined to describe the Priority Queue ADT
 type QueueHeap struct {
-	max   bool
+	min   bool
 	pqArr []*pItem
 	count int
 	table *HeapHash
@@ -21,7 +21,7 @@ type QueueHeap struct {
 func NewHeap(opts Options) *QueueHeap {
 	return &QueueHeap{
 		table: NewHeapHash(),
-		max:   opts.Max,
+		min:   opts.Min,
 	}
 }
 
@@ -36,6 +36,10 @@ type pItem struct {
 // satisfy the binary heap invariant.
 func (m *QueueHeap) InsertPriority(item string, priority int) {
 
+	if m.min == true {
+		priority = -priority
+	}
+
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
 
@@ -45,10 +49,15 @@ func (m *QueueHeap) InsertPriority(item string, priority int) {
 	m.buildHeap(m.pqArr, m.count)
 }
 
-// ShowPriority returns the highest priority but does
+// ShowPriority returns the Min/Max priority but does
 // not remove it from the priority queue
 func (m *QueueHeap) ShowPriority() (string, int) {
 	priorityOne := m.pqArr[0]
+
+	if m.min == true {
+		return priorityOne.Item, -priorityOne.Priority
+	}
+
 	return priorityOne.Item, priorityOne.Priority
 }
 
@@ -153,6 +162,10 @@ func (m *QueueHeap) Poll() (string, int) {
 	m.count--
 	m.buildHeap(m.pqArr, m.count)
 
+	if m.min == true {
+		return p.Item, -p.Priority
+	}
+
 	return p.Item, p.Priority
 }
 
@@ -164,6 +177,10 @@ func (m *QueueHeap) Remove(priority int) bool {
 	// pop index from heap and from hashtable
 	// reduce the count
 	// DeleteFromTable and heapify
+
+	if m.min == true {
+		priority = -priority
+	}
 
 	priorityIndex := m.table.PeekPriority(priority)
 	if priorityIndex == -1 {
