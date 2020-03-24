@@ -4,17 +4,24 @@ import (
 	"encoding/json"
 )
 
-// MaxHeap struct defined to describe the Priority Queue ADT
-type MaxHeap struct {
+// Options for QueueHeap
+type Options struct {
+	Max bool // flag set to either create a max heap or min heap
+}
+
+// QueueHeap struct defined to describe the Priority Queue ADT
+type QueueHeap struct {
+	max   bool
 	pqArr []*pItem
 	count int
 	table *HeapHash
 }
 
-// NewHeap returns a new MaxHeap struct
-func NewHeap() *MaxHeap {
-	return &MaxHeap{
+// NewHeap returns a new QueueHeap struct
+func NewHeap(opts Options) *QueueHeap {
+	return &QueueHeap{
 		table: NewHeapHash(),
+		max:   opts.Max,
 	}
 }
 
@@ -27,7 +34,7 @@ type pItem struct {
 // InsertPriority inserts a new item with priority p in integer.
 // It insert an Item at the end of array and bubbles back up to
 // satisfy the binary heap invariant.
-func (m *MaxHeap) InsertPriority(item string, priority int) {
+func (m *QueueHeap) InsertPriority(item string, priority int) {
 
 	newPriority := &pItem{Item: item, Priority: priority}
 	m.pqArr = append(m.pqArr, newPriority)
@@ -40,13 +47,13 @@ func (m *MaxHeap) InsertPriority(item string, priority int) {
 
 // ShowPriority returns the highest priority but does
 // not remove it from the priority queue
-func (m *MaxHeap) ShowPriority() (string, int) {
+func (m *QueueHeap) ShowPriority() (string, int) {
 	priorityOne := m.pqArr[0]
 	return priorityOne.Item, priorityOne.Priority
 }
 
 // buildHeap function defined
-func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
+func (m *QueueHeap) buildHeap(arr []*pItem, size int) {
 
 	// Index of the last non-leaf node
 	startIdx := (size / 2) - 1
@@ -61,7 +68,7 @@ func (m *MaxHeap) buildHeap(arr []*pItem, size int) {
 
 // Update hashtable and heapify a subtree rooted with node i (rootIndex)
 // which is an index in arr[]. size is the number of items in the heap.
-func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
+func (m *QueueHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 	var leftIndex int
 	var rightIndex int
 	var largest int
@@ -101,7 +108,7 @@ func (m *MaxHeap) hashHeapify(arr []*pItem, rootIndex, size int) {
 }
 
 // ShowHeap function defined
-func (m *MaxHeap) ShowHeap() []string {
+func (m *QueueHeap) ShowHeap() []string {
 	result := make([]string, 0)
 
 	for _, val := range m.pqArr {
@@ -111,7 +118,7 @@ func (m *MaxHeap) ShowHeap() []string {
 	return result
 }
 
-func (m *MaxHeap) swap(arr []*pItem, x, y int) {
+func (m *QueueHeap) swap(arr []*pItem, x, y int) {
 	// swap and update hashtable while at it.
 	tmp := arr[x]
 	idx := m.table.GetFromTable(arr[x].Priority, x)
@@ -125,7 +132,7 @@ func (m *MaxHeap) swap(arr []*pItem, x, y int) {
 }
 
 // Poll defined to remove the top element from the heap
-func (m *MaxHeap) Poll() (string, int) {
+func (m *QueueHeap) Poll() (string, int) {
 
 	// swap root index with last index
 	// i.e array[zero_index] <==> array[last_index]
@@ -151,7 +158,7 @@ func (m *MaxHeap) Poll() (string, int) {
 
 // Remove defined to remove an item from the heap
 // by specified priority
-func (m *MaxHeap) Remove(priority int) bool {
+func (m *QueueHeap) Remove(priority int) bool {
 	// get index to be removed from hashtable
 	// swap index with last_index
 	// pop index from heap and from hashtable
@@ -179,12 +186,12 @@ func (m *MaxHeap) Remove(priority int) bool {
 }
 
 // ShowHashTable show the content of the hash table
-func (m *MaxHeap) ShowHashTable() *Htable {
+func (m *QueueHeap) ShowHashTable() *Htable {
 	t := m.table.GetHashTable()
 	return t
 }
 
 // Length return the length of the priority queue
-func (m *MaxHeap) Length() int {
+func (m *QueueHeap) Length() int {
 	return m.count
 }

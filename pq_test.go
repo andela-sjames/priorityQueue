@@ -9,7 +9,9 @@ import (
 )
 
 func TestPriorityQueue(t *testing.T) {
-	maxheap := pqueue.NewHeap()
+	// defaults to max heap if Max option is
+	// not set to false
+	maxheap := pqueue.NewHeap(pqueue.Options{})
 	assert := assert.New(t)
 
 	maxheap.InsertPriority("Visit China", 2)
