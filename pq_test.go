@@ -67,7 +67,7 @@ func TestMaxPriorityQueue(t *testing.T) {
 
 func TestMinPriorityQueue(t *testing.T) {
 
-	// Set Min option is to true for minheap
+	// Set Min option to true for minheap
 	minheap := pqueue.NewHeap(pqueue.Options{
 		Min: true,
 	})
