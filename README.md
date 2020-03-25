@@ -22,7 +22,9 @@ import (
 )
 
 func main() {
-    maxheap := pqueue.NewHeap()
+    // defaults to max heap if Min option is
+    // not set to true
+    maxheap := pqueue.NewHeap(pqueue.Options{})
 
     maxheap.InsertPriority("Visit China", 2)
     maxheap.InsertPriority("Visit Japan", 7)
