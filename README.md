@@ -10,7 +10,7 @@ of O(1) time for search in comparison to 0(n) time for search without a Hash tab
 An ADT simply defines the behaviour that a DataType(priorityQueue) should have; the Binary Heap Invariant gives
 us a better time complexity than using a linked list or an unsorted list.
 
-Usage: <https://play.golang.org/p/D2SaHHiibU3>
+Usage: <https://play.golang.org/p/fv7fktYiqn9>
 
 ```go
 
@@ -22,8 +22,6 @@ import (
 )
 
 func main() {
-    // defaults to max heap if Min option is
-    // not set to true
     maxheap := pqueue.NewHeap(pqueue.Options{})
 
     maxheap.InsertPriority("Visit China", 2)
@@ -56,12 +54,23 @@ func main() {
     fmt.Println(t) // &map[2:[3 2 4] 7:[0 1]]
 
     l := maxheap.Length()
-    fmt.Println(t) // 5
+    fmt.Println(l) // 5
 
-    // Set Min option to true for minheap
+    // Set Min option is to true for minheap
     minheap := pqueue.NewHeap(pqueue.Options{
         Min: true,
     })
+
+    minheap.InsertPriority("Visit China", 2)
+    minheap.InsertPriority("Visit Japan", 7)
+    minheap.InsertPriority("Eat Pizza", 2)
+    minheap.InsertPriority("Run marathon", 11)
+    minheap.InsertPriority("Buy Banana", 7)
+    minheap.InsertPriority("Go Fishing", 13)
+    minheap.InsertPriority("Skipping", 2)
+
+    item, p = minheap.ShowPriority()
+    fmt.Println(item, p, "The priority") // Visit China 2 The priority
 
 }
 ```
