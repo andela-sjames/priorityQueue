@@ -55,5 +55,11 @@ func main() {
 
     l := maxheap.Length()
     fmt.Println(t) // 5
+
+    // Set Min option is to true for minheap
+    minheap := pqueue.NewHeap(pqueue.Options{
+        Min: true,
+    })
+
 }
 ```
